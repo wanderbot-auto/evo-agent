@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark"><title>Evo Agent</title>
+<style>
+:root{--bg:#0b0e13;--panel:#121720;--line:#242d3b;--text:#e6ebf4;--muted:#8f9bb0;--accent:#a4efcc;--blue:#88b6ff;--purple:#c6a3fc;--orange:#f6bd78;--red:#ff8585}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit;color:var(--text);border:1px solid var(--line);border-radius:8px;background:#0d121a}button{cursor:pointer;padding:8px 12px}button:disabled{opacity:.45;cursor:not-allowed}button:hover:not(:disabled){border-color:var(--muted)}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}input,select{padding:9px;width:100%}textarea{width:100%;resize:vertical;padding:12px;min-height:78px}a{color:var(--blue)}header{height:64px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100vw - 1200px)/2));gap:16px}.brand{display:flex;gap:10px;align-items:center}.logo{font:27px monospace;color:var(--accent)}h1{font-size:16px;margin:0}h2{font-size:14px;margin:0}h3{font-size:12px;margin:0;color:var(--muted)}.subtitle,.note{font-size:11px;color:var(--muted)}main{max-width:1248px;margin:auto;padding:20px 24px 32px;min-width:0}.composer{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}.composer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;gap:12px}.composer-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:8px}.examples,.run-row{display:flex;gap:6px;flex-wrap:wrap}.examples button{font-size:11px;padding:5px 8px;color:var(--muted)}.primary{background:var(--accent);border-color:var(--accent);color:#102b20;font-weight:650;padding:8px 20px}.settings{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}summary{cursor:pointer;color:var(--muted);font-size:12px}.settings summary{display:flex;align-items:center;gap:8px}.settings summary::before{content:'▸';color:var(--accent)}.settings[open] summary::before{content:'▾'}.settings-summary{font:11px ui-monospace,monospace;overflow-wrap:anywhere}.settings-grid{display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:12px;padding-top:5px}label{display:block;color:var(--muted);font-size:11px;margin:8px 0 5px}.auth-row{display:flex;gap:5px}.auth-row input{min-width:0}.auth-status{font-size:11px;color:var(--muted)}.error-banner{display:none;border:1px solid #63363b;background:#29171c;padding:10px;border-radius:7px;color:var(--red);margin:10px 0 0;font-size:12px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}.metric{border:1px solid var(--line);border-radius:9px;padding:10px 14px;background:var(--panel)}.key,.small{font-size:10px;color:var(--muted)}.value{font:19px/1.5 ui-monospace,monospace;margin:3px 0}.context-size{height:3px;background:#273142;border-radius:4px;margin-top:5px;overflow:hidden}.context-size i{display:block;height:100%;background:var(--blue);width:0;transition:width .3s}.trace-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.trace-heading h2{font-size:16px}.trace-heading button{padding:5px 10px;font-size:11px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}.filters{display:flex;gap:5px;flex-wrap:wrap}.filters button{font-size:11px;padding:5px 9px;color:var(--muted)}.filters button.active{border-color:#47785f;color:var(--accent);background:#162b23}.toggle{display:flex;align-items:center;gap:6px;margin:0;white-space:nowrap}.toggle input{width:auto}.trace-panel{border:1px solid var(--line);background:var(--panel);border-radius:12px;overflow:hidden}.trace-header{padding:10px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;font:10px ui-monospace,monospace;color:var(--muted)}.trace{height:clamp(330px,48vh,680px);overflow:auto;padding:8px 16px;scroll-behavior:smooth}.empty{padding:90px 20px;text-align:center;color:var(--muted)}.empty-symbol{font:32px monospace;color:#435164;margin-bottom:8px}.event{display:grid;grid-template-columns:48px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid #202835}.event:last-child{border:0}.event-time{font:10px monospace;color:var(--muted);padding-top:4px}.event-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.event-title{font-weight:550;font-size:12px}.event-kind{font:10px monospace;color:var(--muted);margin-left:auto}.badge{font:10px monospace;border-radius:4px;padding:2px 6px;background:#243047;color:var(--blue)}.badge.tool{background:#17372e;color:var(--accent)}.badge.mcp{background:#312445;color:var(--purple)}.badge.memory{background:#2f2b1d;color:var(--orange)}.badge.compression{background:#293125;color:#c1dc9c}.badge.error{background:#3b2027;color:var(--red)}.event-summary{font:11px/1.7 ui-monospace,monospace;color:#a7b3c6;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:4px}.event details{margin-top:4px}.event summary{font-size:10px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#0d121a;border:1px solid var(--line);padding:12px;border-radius:7px;color:#b6c5db;font:11px/1.8 ui-monospace,monospace;max-height:340px;overflow:auto;margin:8px 0}#streamPreview{display:none;padding:10px 16px;border-bottom:1px solid var(--line)}#streamBody{margin:5px 0 0;max-height:70px}.result{display:none;border:1px solid #315243;background:#11251e;border-radius:10px;padding:16px;margin-top:14px}.result h2{color:var(--accent);font-size:12px;margin-bottom:6px}.answer{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}.inspectors{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px;align-items:start}.box{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:12px;min-width:0}.box-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}.box-heading button{font-size:10px;padding:3px 7px}.memory-item{padding:8px 0;border-bottom:1px solid var(--line);font-size:12px;overflow-wrap:anywhere}.memory-item b{display:block;color:var(--orange);font:11px monospace}.history-item{width:100%;text-align:left;margin-top:7px;font-size:11px;display:flex;justify-content:space-between;gap:8px}.history-item span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.status-running{color:var(--accent)}#contextHint{margin-top:8px}
+@media(max-width:850px){.settings-grid{grid-template-columns:1fr 1fr}.inspectors{grid-template-columns:1fr}.composer-bottom{align-items:flex-start}.metrics{gap:8px}.metric{padding:10px}.event-kind{display:none}}@media(max-width:560px){header{height:56px;padding:0 16px}main{padding:14px 12px 24px}.composer{padding:12px}.composer-bottom{flex-direction:column;gap:10px}.run-row{width:100%}.run-row .primary{flex:1}.metrics{grid-template-columns:1fr 1fr}.settings-grid{grid-template-columns:1fr}.settings summary{align-items:baseline;flex-wrap:wrap}.settings-summary{font-size:10px}.trace{height:440px;padding:8px 12px}.event{grid-template-columns:38px 1fr;gap:7px}.auth-status{font-size:10px}.brand .subtitle{display:none}}
+</style>
+</head>
+<body>
+<header><div class="brand"><span class="logo">⌁</span><h1>Evo Agent</h1><span class="subtitle">smolagents</span></div><a href="https://github.com/huggingface/smolagents" target="_blank" rel="noreferrer" class="subtitle">源码 ↗</a></header>
+<main>
+<section class="composer" aria-label="执行任务">
+<div class="composer-top"><h2><label for="task" style="font-size:14px;color:var(--text);margin:0">任务</label></h2><span id="authStatus" class="auth-status" role="status">未连接</span></div>
+<textarea id="task" rows="2">请使用工具计算 12 × 3 + 5，先乘后加，将结果存入记忆 result，再读取验证，最后给出答案。</textarea>
+<div class="composer-bottom"><div class="examples"><button data-example="math">计算 + 记忆</button><button data-example="mcp">MCP 学习</button><button data-example="compression">压缩实验</button></div><div class="run-row"><button class="primary" id="run">▶ 开始执行</button><button id="stop" disabled>停止</button></div></div>
+<details class="settings" id="settings"><summary>配置 <span class="settings-summary" id="settingsSummary">MiniMax-M3 · 10 步 · 压缩阈值 4,000</span></summary><div class="settings-grid"><div><label for="access">访问口令</label><div class="auth-row"><input id="access" type="password" autocomplete="off" placeholder="应用口令"><button id="connect">连接</button></div></div><div><label for="model">模型</label><select id="model"><option>MiniMax-M3</option></select></div><div><label for="steps">最大步数</label><select id="steps"><option>6</option><option selected>10</option><option>16</option></select></div><div><label for="budget">压缩阈值（估算 token）</label><select id="budget"><option value="200">200 · 实验</option><option value="1000">1,000</option><option value="4000" selected>4,000</option><option value="12000">12,000</option></select></div></div></details>
+<div id="banner" class="error-banner" role="alert"></div>
+</section>
+<div class="metrics"><div class="metric"><div class="key">状态</div><div class="value" id="status">就绪</div><div class="small" id="runId">等待任务</div></div><div class="metric"><div class="key">时间 / 步数</div><div class="value" id="elapsed">0.0 s</div><div class="small" id="stepCount">0 步 · 0 次工具调用</div></div><div class="metric"><div class="key">模型 token</div><div class="value" id="tokens">0</div><div class="small" id="tokenSplit">输入 0 / 输出 0</div></div><div class="metric"><div class="key">上下文（估算 token）</div><div class="value" id="contextTokens">0</div><div class="small" id="compressionCount">0 次压缩</div><div class="context-size"><i id="contextBar"></i></div></div></div>
+<section aria-label="实时执行轨迹">
+<div class="trace-heading"><h2>执行轨迹</h2><button id="export" disabled>↓ 导出 JSON</button></div>
+<div class="toolbar"><div class="filters" id="filters"><button class="active" data-filter="all">全部</button><button data-filter="model">模型</button><button data-filter="tool">工具</button><button data-filter="mcp">MCP</button><button data-filter="memory">记忆</button><button data-filter="compression">压缩</button><button data-filter="error">错误</button></div><label class="toggle"><input type="checkbox" id="follow" checked>跟随</label></div>
+<div class="trace-panel"><div class="trace-header"><span>LIVE TRACE</span><span id="eventCount">0 EVENTS</span></div><div id="streamPreview"><h3>模型输出</h3><pre id="streamBody"></pre></div><div class="trace" id="trace" aria-live="polite"><div class="empty"><div class="empty-symbol">⌁</div>开始执行后，轨迹实时显示在这里</div></div></div>
+<div class="result" id="result"><h2>结果</h2><div class="answer" id="answer"></div></div>
+</section>
+<div class="inspectors"><details class="box" id="memoryPanel"><summary>会话记忆</summary><div class="box-heading"><span class="note">保存在当前浏览器</span><button id="clearMemory">清空</button></div><div id="memory"></div></details><details class="box" id="contextPanel"><summary>模型上下文</summary><div class="box-heading"><span class="note">最近一次请求</span><button id="viewContext">查看快照</button></div><div id="contextHint" class="note">暂无快照</div><pre id="contextDetail" hidden></pre></details><details class="box" id="historyPanel"><summary>运行记录</summary><div id="history"></div></details></div>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const readStorage = (key, fallback) => { try { return JSON.parse(localStorage.getItem(key)) ?? fallback } catch { return fallback } };
+let memory = readStorage('agent-memory', {}), saved = readStorage('agent-runs', []);
+let events = [], filter = 'all', controller = null, timer = null, start = 0, latestContext = null;
+let inputTokens = 0, outputTokens = 0, toolCount = 0, stepCount = 0, compactions = 0, connectedToken = '';
+try { $('access').value = sessionStorage.getItem('agent-access') || '' } catch {}
+function notice(message) { $('banner').textContent = message; $('banner').style.display = message ? 'block' : 'none' }
+function persist(key, value) { try { localStorage.setItem(key, JSON.stringify(value)) } catch { notice('存储空间不足，请导出轨迹并清理记录。') } }
+function settingsSummary() { $('settingsSummary').textContent = `${$('model').value} · ${$('steps').value} 步 · 压缩阈值 ${Number($('budget').value).toLocaleString()}` }
+function showMemory() {
+  const container = $('memory'); container.replaceChildren();
+  if (!Object.keys(memory).length) { container.textContent = '暂无记忆'; container.className = 'note'; return }
+  container.className = '';
+  for (const [key, value] of Object.entries(memory)) {
+    const div = document.createElement('div'); div.className = 'memory-item';
+    const b = document.createElement('b'); b.textContent = key;
+    const text = document.createElement('span'); text.textContent = value;
+    div.append(b, text); container.append(div);
+  }
+}
+function category(event) { return event.type.includes('error') || event.data.error ? 'error' : event.type.split('.')[0] }
+function eventSummary(event) {
+  const d = event.data;
+  if (event.type === 'tool.start') return JSON.stringify(d.arguments);
+  if (event.type === 'tool.end') return d.result;
+  if (event.type === 'model.end') return `${d.input_tokens} input · ${d.output_tokens} output · ${d.duration_ms} ms` + (d.content ? '\n' + d.content : '');
+  if (event.type === 'memory.context') return `${d.message_count} 条消息 · ≈ ${d.estimated_tokens} token`;
+  if (event.type === 'compression.end') return `≈ ${d.estimated_tokens_before} → ${d.estimated_tokens_after} token\n${d.summary}`;
+  if (event.type === 'mcp.result') return d.content;
+  return d.error || '';
+}
+function appendEvent(event) {
+  const cat = category(event); if (filter !== 'all' && filter !== cat) return;
+  const row = document.createElement('div'); row.className = 'event';
+  const time = document.createElement('div'); time.className = 'event-time'; time.textContent = (event.elapsed_ms / 1000).toFixed(1) + 's';
+  const body = document.createElement('div'), head = document.createElement('div'); head.className = 'event-head';
+  const badge = document.createElement('span'); badge.className = 'badge ' + cat; badge.textContent = cat.toUpperCase();
+  const title = document.createElement('span'); title.className = 'event-title'; title.textContent = event.title;
+  const kind = document.createElement('span'); kind.className = 'event-kind'; kind.textContent = event.type;
+  head.append(badge, title, kind); body.append(head);
+  const brief = eventSummary(event);
+  if (brief) { const summary = document.createElement('div'); summary.className = 'event-summary'; summary.textContent = String(brief).slice(0, 600); body.append(summary) }
+  const details = document.createElement('details'), summary = document.createElement('summary'), pre = document.createElement('pre');
+  summary.textContent = '数据'; pre.textContent = JSON.stringify(event.data, null, 2); details.append(summary, pre); body.append(details);
+  row.append(time, body); $('trace').append(row);
+}
+function renderTrace() { $('trace').replaceChildren(); for (const event of events) if (!event.type.endsWith('_delta') && event.type !== 'model.delta') appendEvent(event) }
+function contextMetric(value) { $('contextTokens').textContent = value.toLocaleString(); $('contextBar').style.width = Math.min(100, value / Number($('budget').value) * 100) + '%' }
+function processEvent(event, replay = false) {
+  events.push(event); $('export').disabled = false; $('eventCount').textContent = events.length + ' EVENTS';
+  const d = event.data;
+  if (event.type === 'run.start') { $('trace').replaceChildren(); $('runId').textContent = event.run_id }
+  if (event.type === 'model.delta' || event.type === 'model.tool_delta') {
+    $('status').textContent = event.type === 'model.delta' ? '生成中' : '选工具';
+    $('streamPreview').style.display = 'block'; $('streamBody').textContent = event.type === 'model.delta' ? d.visible_text : (d.name + '\n' + d.arguments); return;
+  }
+  appendEvent(event);
+  if (event.type === 'model.start') { $('status').textContent = '调用模型'; $('streamPreview').style.display = 'block'; $('streamBody').textContent = '等待响应…' }
+  if (event.type === 'model.retry') $('status').textContent = '重试中';
+  if (event.type === 'model.end') $('streamPreview').style.display = 'none';
+  if (event.type === 'tool.start') { toolCount++; $('status').textContent = '执行工具' }
+  if (event.type === 'step.end') { stepCount = d.step; $('stepCount').textContent = `${stepCount} 步 · ${toolCount} 次工具调用` }
+  if (event.type === 'model.end' || event.type === 'compression.end') {
+    inputTokens += d.input_tokens || 0; outputTokens += d.output_tokens || 0;
+    $('tokens').textContent = (inputTokens + outputTokens).toLocaleString();
+    $('tokenSplit').textContent = `输入 ${inputTokens.toLocaleString()} / 输出 ${outputTokens.toLocaleString()}`;
+  }
+  if (event.type === 'context.snapshot') {
+    latestContext = d; contextMetric(d.estimated_tokens);
+    $('contextHint').textContent = `${d.messages.length} 条消息 · ${d.tools.join(' / ')}`;
+    $('contextDetail').textContent = JSON.stringify(d.messages, null, 2);
+  }
+  if (event.type === 'memory.context') contextMetric(d.estimated_tokens);
+  if (event.type === 'memory.write' && !replay) { memory = d.memory; persist('agent-memory', memory); showMemory() }
+  if (event.type === 'compression.start') $('status').textContent = '压缩中';
+  if (event.type === 'compression.end') { compactions++; $('compressionCount').textContent = compactions + ' 次压缩'; contextMetric(d.estimated_tokens_after) }
+  if (event.type === 'run.end' || event.type === 'run.incomplete') {
+    if (!replay) { memory = d.memory; persist('agent-memory', memory); showMemory() }
+    $('result').style.display = 'block'; $('answer').textContent = d.answer; $('status').textContent = event.type === 'run.end' ? '已完成' : '未完成';
+  }
+  if (event.type === 'run.error') { $('status').textContent = '失败'; notice(d.error) }
+  if ($('follow').checked) $('trace').scrollTop = $('trace').scrollHeight;
+}
+async function checkResponse(response, expectedType) {
+  const type = response.headers.get('content-type') || '';
+  if (type.includes('text/html')) throw new Error('登录状态已失效，请刷新页面并登录 Vercel。');
+  if (!response.ok) {
+    if (response.status === 401) { connectedToken = ''; $('settings').open = true; throw new Error('访问口令不正确。') }
+    let detail;
+    if (type.includes('application/json')) { const body = await response.json(); if (typeof body.detail === 'string') detail = body.detail }
+    throw new Error(detail || (response.status >= 500 ? `服务暂不可用（${response.status}），请稍后重试。` : `请求失败（${response.status}）。`));
+  }
+  if (!type.includes(expectedType)) throw new Error('服务返回格式异常，请刷新后重试。');
+}
+function connectionError(error) {
+  if (error instanceof TypeError) return '网络连接中断，未确认任务完成。已收到的轨迹已保留，请检查网络后重试。';
+  if (error instanceof SyntaxError) return '轨迹数据不完整，未确认任务完成。';
+  return error.message || '连接失败，请稍后重试。';
+}
+async function connect() {
+  notice(''); const token = $('access').value.trim();
+  if (!token) { $('settings').open = true; $('access').focus(); notice('请输入访问口令。'); return false }
+  const abort = new AbortController(), deadline = setTimeout(() => abort.abort(), 20000);
+  try {
+    const response = await fetch('/api/models', { headers: { Authorization: 'Bearer ' + token }, signal: abort.signal });
+    await checkResponse(response, 'application/json'); const catalog = await response.json(), selected = $('model').value;
+    $('model').replaceChildren();
+    for (const model of catalog.models) {
+      if (!model.available || !model.tool_call) continue;
+      const option = document.createElement('option'); option.value = model.id; option.textContent = model.id + (model.id === catalog.default_model ? ' · 默认' : ''); $('model').append(option);
+    }
+    $('model').value = [...$('model').options].some(o => o.value === selected) ? selected : catalog.default_model;
+    connectedToken = token; try { sessionStorage.setItem('agent-access', token) } catch {}
+    $('authStatus').textContent = '已连接'; $('authStatus').style.color = 'var(--accent)'; $('settings').open = false; settingsSummary(); return true;
+  } catch (error) { connectedToken = ''; $('authStatus').textContent = '未连接'; notice(error.name === 'AbortError' ? '连接超时，请重试。' : connectionError(error)); return false }
+  finally { clearTimeout(deadline) }
+}
+function reset() {
+  events = []; inputTokens = outputTokens = toolCount = stepCount = compactions = 0; latestContext = null;
+  $('trace').replaceChildren(); $('result').style.display = 'none'; $('answer').textContent = ''; $('status').textContent = '连接中';
+  $('tokens').textContent = '0'; $('stepCount').textContent = '0 步 · 0 次工具调用'; $('tokenSplit').textContent = '输入 0 / 输出 0';
+  $('compressionCount').textContent = '0 次压缩'; $('eventCount').textContent = '0 EVENTS'; $('runId').textContent = '等待响应';
+  $('export').disabled = true; contextMetric(0); $('contextDetail').textContent = ''; $('streamPreview').style.display = 'none'; $('contextHint').textContent = '等待快照'; notice('');
+}
+function browserEvent(type, title, data) { processEvent({ id: 'browser-' + (events.length + 1), run_id: events[0]?.run_id || '', type, title, elapsed_ms: Date.now() - start, data: { source: 'browser', ...data } }) }
+async function run() {
+  if (controller || $('run').disabled) return;
+  const task = $('task').value.trim(); if (!task) { notice('请输入任务。'); return }
+  $('run').disabled = true;
+  if (connectedToken !== $('access').value.trim() && !await connect()) { $('run').disabled = false; return }
+  reset(); controller = new AbortController(); $('stop').disabled = false; start = Date.now();
+  const config = { task, model: $('model').value, max_steps: Number($('steps').value), context_budget: Number($('budget').value), memory };
+  $('settings').open = false; let clientTimeout = false;
+  const deadline = setTimeout(() => { clientTimeout = true; controller?.abort() }, 250000);
+  timer = setInterval(() => $('elapsed').textContent = ((Date.now() - start) / 1000).toFixed(1) + ' s', 100);
+  try {
+    const response = await fetch('/api/run', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + connectedToken }, body: JSON.stringify(config), signal: controller.signal });
+    await checkResponse(response, 'text/event-stream');
+    if (!response.body) throw new Error('浏览器无法读取事件流。');
+    const reader = response.body.getReader(), decoder = new TextDecoder(); let buffer = '';
+    while (true) {
+      const { done, value } = await reader.read(); buffer += decoder.decode(value || new Uint8Array(), { stream: !done });
+      let separator;
+      while ((separator = /\r?\n\r?\n/.exec(buffer))) {
+        const block = buffer.slice(0, separator.index); buffer = buffer.slice(separator.index + separator[0].length);
+        const data = block.split(/\r?\n/).filter(line => line.startsWith('data:')).map(line => line.slice(5).trimStart()).join('\n');
+        if (data) processEvent(JSON.parse(data));
+      }
+      if (done) break;
+    }
+    if (!events.some(e => ['run.end', 'run.error', 'run.incomplete'].includes(e.type))) throw new Error('事件流提前结束，未确认任务完成。');
+  } catch (error) {
+    if (!events.some(e => ['run.end', 'run.error', 'run.incomplete'].includes(e.type))) {
+      if (error.name === 'AbortError' && !clientTimeout) { browserEvent('run.cancelled', '已停止', { note: '用户停止运行' }); $('status').textContent = '已停止' }
+      else browserEvent('run.error', '连接失败', { code: clientTimeout ? 'client_timeout' : 'stream_connection', error: clientTimeout ? '运行连接超时，请重试。' : connectionError(error) });
+    }
+  } finally {
+    clearTimeout(deadline); clearInterval(timer); $('streamPreview').style.display = 'none'; $('run').disabled = false; $('stop').disabled = true; controller = null;
+    if (events.length) { saved.unshift({ task, model: config.model, at: new Date().toISOString(), events }); saved = saved.slice(0, 5); persist('agent-runs', saved); showHistory() }
+  }
+}
+function showHistory() {
+  $('history').replaceChildren();
+  for (const record of saved) {
+    const button = document.createElement('button'); button.className = 'history-item';
+    const label = document.createElement('span'); label.textContent = record.task;
+    const date = document.createElement('span'); date.textContent = new Date(record.at).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }); button.append(label, date);
+    button.onclick = () => { if (controller || $('run').disabled) return; reset(); $('task').value = record.task; if ([...$('model').options].some(o => o.value === record.model)) $('model').value = record.model; settingsSummary(); for (const event of record.events) processEvent(event, true); $('status').textContent = '回看'; $('elapsed').textContent = ((record.events.at(-1)?.elapsed_ms || 0) / 1000).toFixed(1) + ' s' };
+    $('history').append(button);
+  }
+  if (!saved.length) $('history').textContent = '暂无记录';
+}
+const examples = {
+  math: '请使用工具计算 12 × 3 + 5，先乘后加，将结果存入记忆 result，再读取验证，最后给出答案。',
+  mcp: '请通过 MCP 分别查询 agent、memory 和 mcp 的学习笔记，解释它们如何协作。把一句核心结论保存到记忆 learning，再读取确认，最后用中文总结。',
+  compression: '请依次通过 MCP 查询 agent、memory、compression、mcp 四份笔记。每次查询后将一句摘要分别保存到记忆。最后读取全部记忆，用中文解释 Agent 的上下文、压缩和长期记忆的区别。'
+};
+document.querySelectorAll('[data-example]').forEach(button => button.onclick = () => { if (controller) return; const kind = button.dataset.example; $('task').value = examples[kind]; $('budget').value = kind === 'compression' ? '200' : '4000'; $('steps').value = kind === 'compression' ? '16' : '10'; settingsSummary() });
+['model', 'steps', 'budget'].forEach(id => $(id).onchange = settingsSummary);
+$('filters').onclick = event => { const button = event.target.closest('[data-filter]'); if (!button) return; filter = button.dataset.filter; document.querySelectorAll('[data-filter]').forEach(b => b.classList.toggle('active', b === button)); renderTrace() };
+$('connect').onclick = connect; $('run').onclick = run; $('stop').onclick = () => controller?.abort();
+$('clearMemory').onclick = () => { memory = {}; persist('agent-memory', memory); showMemory() };
+$('viewContext').onclick = () => { $('contextDetail').hidden = !$('contextDetail').hidden };
+$('export').onclick = () => {
+  const blob = new Blob([JSON.stringify({ exported_at: new Date().toISOString(), events }, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob), link = document.createElement('a'); link.href = url; link.download = 'agent-trace-' + (events[0]?.run_id || 'local') + '.json'; link.click(); URL.revokeObjectURL(url);
+};
+showMemory(); showHistory(); settingsSummary(); if ($('access').value) connect();
+
+</script></body></html>

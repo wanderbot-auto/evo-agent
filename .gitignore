@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+.venv/
+.vercel/
+__pycache__/
+.pytest_cache/
+artifacts/
+deploy-payload.json
+probe_models.py
+ACCESS.txt
